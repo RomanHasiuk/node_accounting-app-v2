@@ -34,12 +34,11 @@ const create = (req, res) => {
   const user = userService.getUserById(Number(userId));
 
   if (!user) {
-    // Using 400 instead of 404 to satisfy automated tests in expense.test.js:60
-    return res.status(400).send('Bad Request');
+    return res.status(400).send('User not found');
   }
 
   const expense = expenseService.createExpense(
-    userId,
+    Number(userId),
     spentAt,
     title,
     amount,
